@@ -43,30 +43,19 @@ client
   })
   .then(console.log);
 
-User.findOne({ email: "cscopetski@gmail.com" })
-  .then((user) => {
-    console.log(user);
-    user.set("playerStats.currHealth", user.playerStats.currHealth + 1);
-    return user;
-  })
-  .then((user1) => {
-    user1.save().then(() => {
-      User.find().then((data) => {
-        console.log(data);
-      });
-    });
-  });
-// new User({
-//   email: "cscopetski@gmail.com",
-//   password: "123",
-//   playerStats: {
-//     maxHealth: 10,
-//     currHealth: 5,
-//     damage: 5,
-//     gold: 10,
-//     currLevel: 4,
-//   },
+// User.findOne({ email: "cscopetski@gmail.com" })
+//   .then((user) => {
+//     console.log(user);
+//     user.set("playerStats.currHealth", user.playerStats.currHealth + 1);
+//     return user;
+//   })
+//   .then((user1) => {
+// user1.save().then(() => {
+//   User.find().then((data) => {
+//     console.log(data);
+//   });
 // });
+//   });
 
 app.get("/", (req, res) => res.send("Hello World!"));
 
