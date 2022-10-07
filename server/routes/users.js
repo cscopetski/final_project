@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("../models/user.schema");
-const { loginUser, getUser } = require("../services/login.service");
+const { loginUser } = require("../services/login.service");
+const { getUser, updateStats } = require("../services/user.service");
 
 const router = express.Router();
 
@@ -11,7 +12,37 @@ router.get("/stats", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.sendStatus(400);
+      res.sendStatus(404);
+    });
+});
+
+/*
+  Updates user's player stats and returns the updated stats
+
+  body options:
+
+  damage,
+  maxHealth,
+  currHealth,
+  gold,
+
+  Example request body:
+  "Player took 3 damage and spent 10 gold"
+  body = {currHealth: -3, gold: -10}
+
+  "Player healed 3 damage and gained 10 maxHealth"
+  body = {currHealth: 3, maxHealth: 10}
+*/
+router.post("/update-stats", (req, res) => {
+  getUser(req.session.email)
+    .then((user) => {
+      updateStats(user, req.body).then((data) => {
+        res.json(data);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(404);
     });
 });
 
@@ -24,7 +55,7 @@ router.post("/login", async (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.sendStatus(403);
+      res.sendStatus(401);
     });
 });
 

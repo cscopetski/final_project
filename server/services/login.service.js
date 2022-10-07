@@ -1,17 +1,10 @@
 const User = require("../models/user.schema");
-
-function getUser(email) {
-  return new Promise((resolve, reject) => {
-    User.findOne({ email: email }, (err, res) => {
-      err ? reject(err) : resolve(res);
-    });
-  });
-}
+const bcrypt = require("bcrypt");
 
 async function loginUser(userData) {
   let checkUser = await getUser(userData.email);
   console.log("Check User: " + checkUser);
-  if (checkUser !== undefined) {
+  if (checkUser !== null) {
     console.log("User already exists");
     if (userData.password === null) {
       return { email: userData.email, login: true };
@@ -35,7 +28,8 @@ async function loginUser(userData) {
           userData.password = password;
           userData.foods = [];
           return new Promise((resolve, reject) => {
-            User.insertOne(userData, (err, res) => {
+            const newUser = new User(userData);
+            newUser.save((err, res) => {
               if (err) {
                 reject(err);
               } else {
@@ -61,4 +55,4 @@ async function loginUser(userData) {
   }
 }
 
-module.exports = { getUser, loginUser };
+module.exports = { loginUser };

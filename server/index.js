@@ -6,6 +6,9 @@ const dotenv = require("dotenv");
 const router = require("./routes");
 const mongoose = require("mongoose");
 const User = require("./models/user.schema");
+const { loginUser } = require("./services/login.service");
+const { getEnemies } = require("./services/encounters.service");
+const { updateStats } = require("./services/user.service");
 dotenv.config();
 
 app.use(express.static("public"));
@@ -43,19 +46,21 @@ client
   })
   .then(console.log);
 
-// User.findOne({ email: "cscopetski@gmail.com" })
-//   .then((user) => {
-//     console.log(user);
-//     user.set("playerStats.currHealth", user.playerStats.currHealth + 1);
-//     return user;
-//   })
-//   .then((user1) => {
-// user1.save().then(() => {
-//   User.find().then((data) => {
-//     console.log(data);
+User.findOne({ email: "cscopetski@gmail.com" }).then((user) => {
+  console.log(user);
+  updateStats(user, { currHealth: 3 }).then((data) => console.log(data));
+});
+// .then((user1) => {
+//   user1.save().then(() => {
+//     User.find().then((data) => {
+//       console.log(data);
+//     });
 //   });
 // });
-//   });
+
+// loginUser({ email: "cscopetski@gmail.com", password: "123" });
+
+// console.log(getEnemies(3));
 
 app.get("/", (req, res) => res.send("Hello World!"));
 
