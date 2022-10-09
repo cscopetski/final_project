@@ -1,5 +1,11 @@
 const User = require("../models/user.schema");
 
+async function playerDie(user) {
+  const updatedUser = new User(user);
+  updatedUser.playerStats = {};
+  return await updatedUser.save();
+}
+
 function getUser(email) {
   return new Promise((resolve, reject) => {
     User.findOne({ email: email }, (err, res) => {
@@ -35,4 +41,28 @@ async function updateStats(user, stats) {
   });
 }
 
-module.exports = { getUser, updateStats };
+async function setStats(user, stats) {
+  const updatedUser = new User(user);
+
+  updatedUser.playerStats.maxHealth = stats.maxHealth ? stats.maxHealth : 0;
+
+  updatedUser.playerStats.currHealth = stats.currHealth ? stats.currHealth : 0;
+
+  updatedUser.playerStats.currHealth = Math.max(
+    updatedUser.playerStats.currHealth,
+    0
+  );
+
+  updatedUser.playerStats.damage = stats.damage ? stats.damage : 0;
+
+  updatedUser.playerStats.gold = stats.gold ? stats.gold : 0;
+  updatedUser.playerStats.gold = Math.max(updatedUser.playerStats.gold, 0);
+
+  return new Promise((resolve, reject) => {
+    updatedUser.save((err, res) => {
+      err ? reject(err) : resolve(updatedUser.playerStats);
+    });
+  });
+}
+
+module.exports = { getUser, updateStats, setStats, playerDie };

@@ -99,7 +99,11 @@ client
   .then(console.log);
 
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../public/html/login.html"));
+  if (req.session.email) {
+    res.redirect("/home");
+  } else {
+    res.sendFile(path.resolve(__dirname, "../public/html/login.html"));
+  }
 });
 
 app.use("/home", express.static("./"));

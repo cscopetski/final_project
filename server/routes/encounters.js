@@ -1,4 +1,6 @@
 const express = require("express");
+const { getEncounter } = require("../services/encounters.service");
+const { getUser } = require("../services/user.service");
 
 const router = express.Router();
 
