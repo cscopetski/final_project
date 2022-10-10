@@ -24,6 +24,7 @@
     "express-session": "^1.17.3",
     "mongodb": "^4.10.0",
     "mongoose": "^6.6.5",
+    "nes.css": "^2.3.0",
     "passport": "^0.6.0"
   }
 }
