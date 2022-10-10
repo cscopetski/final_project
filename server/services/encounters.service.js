@@ -4,6 +4,8 @@ const shopFrequency = 3;
 const combatFrequency = 0.5;
 
 //Shop generation constants
+maxHeaalthUp = 10 * FileSystem.Math.Pow(1.07, mHU);
+maxDamageUp = 25 * FileSystem.Math.Pow(1.07, mHU);
 
 //Enemy generation constants
 const enemyNames = ["Goblin", "Slime", "Orc", "Skeleton"];
@@ -33,7 +35,29 @@ function getEncounter(level) {
   return encounter;
 }
 
-function getItems(level) {}
+function getItems(level) {
+
+  switch (level)
+  {
+    case 1: //health
+      maxHealth++;
+      health++;
+      mHU++;
+      break;
+    case 2: //damage
+      damage++;
+      dU++;
+      break;
+    case 3://heal
+      health += 1 + (maxHealth*.25);
+      break;
+    default:
+      System.out.println("bruh");
+      break;
+  }
+
+
+}
 
 /*
   returns a list of randomly generated enemies with total level equal to
