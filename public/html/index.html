@@ -1,39 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>CS4241 Final Project</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="initial-scale=2.0,width=device-width" />
-        <link rel="stylesheet" href="css/style.css">
-        <script src="js/scripts.js"></script>
-    </head>
-    <body>
-        <h1>
-            RPG Name
-        </h1>
-        <div class="panels">
-            <div class="leftPanel">
-                  <h2>Stats</h2>
-                  <p>Avatar and stats and stuff</p>
-            </div>
-              
-              <div class="mainPanel">
-                  <h2>Your journey</h2>
-                  <p>You encounter gompei in the wilderness.</p>
-              </div> 
-            
-              <div class="rightPanel">
-                  <h2>Sprites</h2>
-              </div> 
-            </div>
-          <div class="bottom">
-            <div class="bottomPanel">
-                  <h2>Options</h2>
-                  <button id=1>Choice 1</button>
-                  <button id=2>Choice 2</button>
-                  <button id=3>Choice 3</button>
-                  <button id=4>Choice 4</button>
-              </div> 
-          </div>
-    </body>
+  <head>
+    <title>CS4241 Final Project</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=2.0,width=device-width" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/main-script.js"></script>
+  </head>
+  <body>
+    <h1>RPG Name</h1>
+    <div class="panels">
+      <div class="leftPanel">
+        <h2>Stats</h2>
+        <p>Avatar and stats and stuff</p>
+        <div id="stats-container"></div>
+      </div>
+
+      <div class="mainPanel">
+        <h2>Your journey</h2>
+        <div id="game-text-container">
+          <p>You encounter gompei in the wilderness.</p>
+        </div>
+      </div>
+
+      <div class="rightPanel">
+        <h2>Sprites</h2>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="bottomPanel">
+        <h2>Options</h2>
+        <p id="encounter-title-container"></p>
+        <div id="button-container"></div>
+      </div>
+    </div>
+  </body>
 </html>

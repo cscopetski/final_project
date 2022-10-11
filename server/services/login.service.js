@@ -1,5 +1,6 @@
 const User = require("../models/user.schema");
 const bcrypt = require("bcrypt");
+const { getUser } = require("./user.service");
 
 async function loginUser(userData) {
   let checkUser = await getUser(userData.email);

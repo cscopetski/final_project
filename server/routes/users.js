@@ -1,7 +1,12 @@
 const express = require("express");
 const User = require("../models/user.schema");
 const { loginUser } = require("../services/login.service");
-const { getUser, updateStats } = require("../services/user.service");
+const {
+  getUser,
+  updateStats,
+  setStats,
+  playerDie,
+} = require("../services/user.service");
 
 const router = express.Router();
 
@@ -9,6 +14,19 @@ router.get("/stats", (req, res) => {
   getUser(req.session.email)
     .then((user) => {
       res.json(user.playerStats);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(404);
+    });
+});
+
+router.get("/die", (req, res) => {
+  getUser(req.session.email)
+    .then((user) => {
+      playerDie(user).then(() => {
+        res.sendStatus(200);
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -37,6 +55,19 @@ router.post("/update-stats", (req, res) => {
   getUser(req.session.email)
     .then((user) => {
       updateStats(user, req.body).then((data) => {
+        res.json(data);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(404);
+    });
+});
+
+router.post("/set-stats", (req, res) => {
+  getUser(req.session.email)
+    .then((user) => {
+      setStats(user, req.body).then((data) => {
         res.json(data);
       });
     })

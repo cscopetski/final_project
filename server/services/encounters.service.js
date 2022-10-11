@@ -130,4 +130,4 @@ function createEnemy(level) {
 
 function getChoices(level) {}
 
-module.exports = { getEncounter, getEnemies };
+module.exports = { getEncounter, getEnemies, encounterTypes };
