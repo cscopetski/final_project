@@ -13,6 +13,18 @@ p {
   font-size: 12px;
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.logout-button {
+  display: inline-block;
+  align-self: flex-end;
+}
+
 .stats {
   display: flex;
   align-items: flex-start;

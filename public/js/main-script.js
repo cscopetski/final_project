@@ -4,6 +4,9 @@ const req_headers = new Headers();
 req_headers.append("Content-Type", "application/json");
 
 window.onload = function () {
+  const logoutButton = document.getElementById("logout-button");
+  logoutButton.onclick = logout;
+
   getNextEncounter();
 };
 
@@ -269,4 +272,8 @@ function printToScreen(msg) {
 function setEncounterText(msg) {
   const screen = document.querySelector("#encounter-title-container");
   screen.textContent = msg;
+}
+
+async function logout() {
+  document.location.href = "/logout";
 }
