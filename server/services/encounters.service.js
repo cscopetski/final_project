@@ -24,7 +24,7 @@ function getEncounter(level) {
 
   if (level % shopFrequency === 0) {
     encounter.type = encounterTypes[0];
-    encounter.data.items = getItems(level);
+    // encounter.data.items = getItems(level);
   } else if (Math.random() <= combatFrequency) {
     encounter.type = encounterTypes[1];
     encounter.data.enemies = getEnemies(level);
