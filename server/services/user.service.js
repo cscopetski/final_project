@@ -44,18 +44,30 @@ async function updateStats(user, stats) {
 async function setStats(user, stats) {
   const updatedUser = new User(user);
 
-  updatedUser.playerStats.maxHealth = stats.maxHealth ? stats.maxHealth : 0;
+  console.log(stats);
 
-  updatedUser.playerStats.currHealth = stats.currHealth ? stats.currHealth : 0;
+  updatedUser.playerStats.picture = stats.picture
+    ? stats.picture
+    : updatedUser.playerStats.picture;
+
+  updatedUser.playerStats.name = stats.name ? stats.name : "Gompei";
+
+  updatedUser.playerStats.currHealth = stats.currHealth
+    ? stats.currHealth
+    : updatedUser.playerStats.currHealth;
 
   updatedUser.playerStats.currHealth = Math.max(
     updatedUser.playerStats.currHealth,
     0
   );
 
-  updatedUser.playerStats.damage = stats.damage ? stats.damage : 0;
+  updatedUser.playerStats.damage = stats.damage
+    ? stats.damage
+    : updatedUser.playerStats.damage;
 
-  updatedUser.playerStats.gold = stats.gold ? stats.gold : 0;
+  updatedUser.playerStats.gold = stats.gold
+    ? stats.gold
+    : updatedUser.playerStats.gold;
   updatedUser.playerStats.gold = Math.max(updatedUser.playerStats.gold, 0);
 
   return new Promise((resolve, reject) => {

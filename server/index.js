@@ -14,7 +14,6 @@ const { getEnemies } = require("./services/encounters.service");
 const { updateStats } = require("./services/user.service");
 const passport = require("passport");
 
-
 dotenv.config();
 
 app.use(bodyParser.json());
@@ -110,6 +109,10 @@ app.get("/", (req, res) => {
 app.use("/home", express.static("./"));
 app.get("/home", auth, (req, res) => {
   res.sendFile(path.resolve(__dirname, "../public/html/index.html"));
+});
+
+app.get("/select", auth, (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../public/html/charSelect.html"));
 });
 
 app.post("/login", async (req, res) => {

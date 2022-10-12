@@ -52,6 +52,7 @@
 </html>
 
 <script>
+  
   const req_headers = new Headers();
   req_headers.append("Content-Type", "application/json");
 
@@ -85,8 +86,21 @@
           if (data.login === false) {
             alert("Unknown email, created new account");
             // showCustomLoginAlert("Unknown email, created new account.");
+          }else{
+            getPlayerStats().then((stats) => {
+              console.log(stats)
+              if(stats.currLevel > 0){
+                document.location.href = "/home";
+              }else{
+                document.location.href = "/select";
+              }
+            }).catch((err) => {
+              console.log(err);
+            })
+
+            
           }
-          document.location.href = "/home";
+
         })
         .catch((err) => showCustomLoginAlert("Incorrect password!") );
     } else {
@@ -99,4 +113,18 @@
     document.getElementById('dialog-default').showModal();
   }
 
+
+  async function getPlayerStats() {
+  return await fetch("/users/stats", {
+    method: "GET",
+    headers: req_headers,
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      return data;
+    })
+    .catch((err) => console.log(err));
+}
 </script>

@@ -28,9 +28,6 @@ function getEncounter(level) {
   } else if (Math.random() <= combatFrequency) {
     encounter.type = encounterTypes[1];
     encounter.data.enemies = getEnemies(level);
-  } else {
-    encounter.type = encounterTypes[2];
-    encounter.data.choices = getChoices(level);
   }
 
   return encounter;

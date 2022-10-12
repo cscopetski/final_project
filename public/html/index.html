@@ -26,9 +26,19 @@
     <section class="panels">
       <div class="nes-container with-title" id="leftPanel">
         <p class="title">Stats</p>
-        <p>Avatar and stats and stuff</p>
+        <div class="container">
+          <img id="displayedImg" class="avatar" />
+          <div id="player-name"></div>
+        </div>
         <container class="stats">
           <div id="stats-container"></div>
+          <i class="nes-icon coin is-large"></i>
+          <progress
+            id="health-bar"
+            class="nes-progress is-success"
+            value="50"
+            max="100"
+          ></progress>
         </container>
       </div>
 

@@ -67,6 +67,7 @@ router.post("/update-stats", (req, res) => {
 router.post("/set-stats", (req, res) => {
   getUser(req.session.email)
     .then((user) => {
+      console.log(req.body);
       setStats(user, req.body).then((data) => {
         res.json(data);
       });

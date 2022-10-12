@@ -7,11 +7,39 @@ window.onload = function () {
   const logoutButton = document.getElementById("logout-button");
   logoutButton.onclick = logout;
 
-  getNextEncounter();
+  const playerAvatar = document.getElementById("displayedImg");
+  const playerName = document.getElementById("player-name");
+
+  getPlayerStats()
+    .then((stats) => {
+      playerName.innerHTML = stats.name;
+      console.log(stats.picture);
+      switch (stats.picture) {
+        case 0:
+          playerAvatar.src = "/public/images/hammer_guy.png";
+          break;
+        case 1:
+          playerAvatar.src = "/public/images/knight.png";
+          break;
+        case 2:
+          playerAvatar.src = "/public/images/sorceress.png";
+          break;
+        default:
+          playerAvatar.src = "/public/images/hammer_guy.png";
+          break;
+      }
+      getNextEncounter();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 function updateHealth(element, curr, max) {
   const div = document.createElement("div");
+  const bar = document.getElementById("health-bar");
+  bar.value = curr;
+  bar.max = max;
   div.innerText = "Health: " + curr + "/" + max;
   element.append(div);
 }
@@ -93,7 +121,7 @@ async function getNextEncounter() {
 
 function restart() {
   playerDie().then(() => {
-    window.location.reload();
+    document.location.href = "/select";
   });
 }
 
