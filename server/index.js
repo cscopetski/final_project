@@ -14,6 +14,7 @@ const { getEnemies } = require("./services/encounters.service");
 const { updateStats } = require("./services/user.service");
 const passport = require("passport");
 
+
 dotenv.config();
 
 app.use(bodyParser.json());

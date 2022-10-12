@@ -6,33 +6,42 @@
     <meta name="viewport" content="initial-scale=2.0,width=device-width" />
     <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/main-script.js"></script>
+    <link rel="stylesheet" href="./node_modules/nes.css/css/nes.min.css" />
+    <link
+      href="https://unpkg.com/nes.css/css/nes-core.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+      rel="stylesheet"
+    />
+    <!--script type ="module" src="../js/scripts.js"></script-->
   </head>
   <body>
     <h1>RPG Name</h1>
-    <div class="panels">
-      <div class="leftPanel">
-        <h2>Stats</h2>
+    <section class="panels">
+      <div class="nes-container with-title" id="leftPanel">
+        <p class="title">Stats</p>
         <p>Avatar and stats and stuff</p>
         <div id="stats-container"></div>
       </div>
 
-      <div class="mainPanel">
-        <h2>Your journey</h2>
+      <div class="nes-container with-title" id="midPanel">
+        <p class="title">Your Journey</p>
         <div id="game-text-container">
           <p>You encounter gompei in the wilderness.</p>
         </div>
       </div>
 
-      <div class="rightPanel">
-        <h2>Sprites</h2>
+      <div class="nes-container with-title" id="rightPanel">
+        <p class="title">Sprites</p>
       </div>
-    </div>
-    <div class="bottom">
-      <div class="bottomPanel">
-        <h2>Options</h2>
+
+      <div class="nes-container with-title" id="bottom">
+        <p class="title">Options</p>
         <p id="encounter-title-container"></p>
         <div id="button-container"></div>
       </div>
-    </div>
+    </section>
   </body>
 </html>
