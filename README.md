@@ -2,6 +2,8 @@
 
 ### 1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
 
+#### Link: https://final-project-gompeis-gambit.glitch.me
+
 The main gameplay loop consists of two features:
 #### Combat:
   - 1-4 randomly generated enemies (stats, type, etc.), with difficulty scaling based on how many encounters the player has completed. 
