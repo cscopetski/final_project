@@ -85,7 +85,7 @@
           console.log(data);
           if (data.login === false) {
             alert("Unknown email, created new account");
-            // showCustomLoginAlert("Unknown email, created new account.");
+            document.location.href = "/select";
           }else{
             getPlayerStats().then((stats) => {
               console.log(stats)
