@@ -4,8 +4,10 @@ const shopFrequency = 3;
 const combatFrequency = 0.5;
 
 //Shop generation constants
-
-
+const shopAttackModifer = 2;
+const shopHealthModifier = 3;
+const shopCurrHealthModifier = 3;
+const shopGoldModifer = 1.07;
 //Enemy generation constants
 const enemyNames = ["Goblin", "Slime", "Orc", "Skeleton"];
 const enemyAttackModifer = 2;
@@ -36,10 +38,10 @@ function getEncounter(level) {
 
 function getItems(level) {
   const items = [];
-  
-  items.push(createItem("DamageUp",25,damage))
-  items.push(createItem("HealthUp",10,health))
-  items.push(createItem("Potion",15))
+
+  items.push(createItem("DamageUp", 25, shopAttackModifer));
+  items.push(createItem("HealthUp", 10, shopHealthModifier));
+  items.push(createItem("Potion", 15, shopCurrHealthModifier));
 
   return items;
 }
@@ -47,24 +49,12 @@ function getItems(level) {
 //n = name
 //c = cost
 //s = stats
-createItem(n,c,s)//stat boosts
-{
-
-  cUp = playerStats.s - defaultStats.s; 
-
-  return{
+function createItem(n, c, s) {
+  return {
     name: n,
     stat: s,
-    cost: c * FileSystem.Math.Pow(1.07, cUP)
-  }
-}
-createItem(n,c)//potion
-{
-
-  return{
-    name: n,
-    cost: c
-  }
+    cost: c * Math.pow(shopGoldModifer, cUP),
+  };
 }
 
 /*
