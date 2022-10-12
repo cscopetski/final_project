@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
     <title>Login</title>
@@ -7,24 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Login" />
     <link rel="stylesheet" href="../css/login.css" />
+    
+    <!-- google font API -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <!-- for nes.css -->
+    <!-- latest -->
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <!-- core style only -->
+    <link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
+
   </head>
   <body class="login-page">
     <h1>RPG Game</h1>
-
-    <form class="login-form" id="login-form" method="POST" aria-label="Login">
+    <form class="login-form nes-container with-title is-centered" id="login-form" method="POST" aria-label="Login">
       <h2>Login</h2>
-      <input type="email" id="email" placeholder="email" aria-label="Email" />
-      <input
-        type="password"
-        name="password"
-        id="password"
-        placeholder="password"
-        aria-label="Password"
-      />
-      <button id="login-button" onclick="login">Login</button>
+      <div class="nes-field" id="email-input-box">
+        <label for="name_field">Username:</label>
+        <input type="email" id="email" placeholder="email" class ="nes-input">
+      </div>
+      <div  padding: 1rem;" class="nes-field" id="password-input-box">
+        <label for="name_field">Password:</label>
+        <input type="password" id="password" class="nes-input" placeholder="password">
+      </div>
+
+      <button class="nes-btn" id="login-button" onclick="login">Login</button>
     </form>
+
+    <!-- Dialog -->
+
+  <section>
+    <dialog class="nes-dialog" id="dialog-default">
+      <form method="dialog">
+        <!-- <p class="title">Dialog</p> -->
+        <p id="alert-content-login-error"> generic missing field/created new account </p>
+        <menu class="dialog-menu">
+          <button class="nes-btn is-primary">Okay</button>
+        </menu>
+      </form>
+    </dialog>
+  </section>
   </body>
 </html>
+
 <script>
   const req_headers = new Headers();
   req_headers.append("Content-Type", "application/json");
@@ -58,12 +84,19 @@
           console.log(data);
           if (data.login === false) {
             alert("Unknown email, created new account");
+            // showCustomLoginAlert("Unknown email, created new account.");
           }
           document.location.href = "/home";
         })
-        .catch((err) => window.alert("Incorrect password"));
+        .catch((err) => showCustomLoginAlert("Incorrect password!") );
     } else {
-      alert("Fill out missing fields!");
+      showCustomLoginAlert("Fill out missing fields!");
     }
   };
+
+  function showCustomLoginAlert(stringToDisplay){
+    document.getElementById('alert-content-login-error').textContent = stringToDisplay;
+    document.getElementById('dialog-default').showModal();
+  }
+
 </script>
