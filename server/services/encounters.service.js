@@ -1,12 +1,12 @@
 //Encounter generation constants
 const encounterTypes = ["shop", "combat", "non-combat"];
-const shopFrequency = 3;
+const shopFrequency = 2;
 const combatFrequency = 0.5;
 
 //Shop generation constants
-const shopAttackModifer = 2;
-const shopHealthModifier = 3;
-const shopCurrHealthModifier = 3;
+const shopAttackModifer = 5;
+const shopHealthModifier = 7;
+const shopCurrHealthModifier = 10;
 const shopGoldModifer = 1.07;
 //Enemy generation constants
 const enemyNames = ["Goblin", "Slime", "Orc", "Skeleton"];
@@ -24,8 +24,8 @@ function getEncounter(level) {
 
   if (level % shopFrequency === 0) {
     encounter.type = encounterTypes[0];
-    // encounter.data.items = getItems(level);
-  } else if (Math.random() <= combatFrequency) {
+    encounter.data.items = getItems(level);
+  } else {
     encounter.type = encounterTypes[1];
     encounter.data.enemies = getEnemies(level);
   }
@@ -36,33 +36,43 @@ function getEncounter(level) {
 function getItems(level) {
   const items = [];
 
-  items.push(createItem("DamageUp", 25, shopAttackModifer));
-  items.push(createItem("HealthUp", 10, shopHealthModifier));
-  items.push(createItem("Potion", 15, shopCurrHealthModifier));
+  const maxAttack = enemyAttackModifer * level;
+  const minAttack = enemyAttackModifer;
+
+  const maxHealth = enemyHealthModifier * level;
+  const minHealth = enemyHealthModifier;
+
+  const maxGold = enemyGoldModifer * 0.5 * level;
+  const minGold = enemyGoldModifer;
+
+  const dmg = {
+    name: "DamageUp",
+    stat: Math.floor(Math.random() * (maxAttack + 1 - minAttack) + minAttack),
+    cost: Math.floor(Math.random() * (maxGold + 1 - minGold) + minGold),
+  };
+
+  const health = {
+    name: "HealthUp",
+    stat: Math.floor(Math.random() * (maxHealth + 1 - minHealth) + minHealth),
+    cost: Math.floor(Math.random() * (maxGold + 1 - minGold) + minGold),
+  };
+
+  const heal = {
+    name: "Potion",
+    stat: Math.floor(
+      Math.random() * (maxHealth * 2 + 1 - minHealth * 2) + minHealth * 2
+    ),
+    cost: Math.floor(
+      Math.random() * (Math.floor(maxGold / 2) + 1 - minGold) + minGold
+    ),
+  };
+
+  items.push(dmg);
+  items.push(health);
+  items.push(heal);
 
   return items;
 }
-
-//n = name
-//c = cost
-//s = stats
-function createItem(n, c, s) {
-  return {
-    name: n,
-    stat: s,
-    cost: c * Math.pow(shopGoldModifer, cUP),
-  };
-}
-
-/*
-  returns a list of randomly generated enemies with total level equal to
-  current player level (up to 4 [maxNumEnemies] enemies)
-  Ex. getEnemies(3) -> 
-  [
-  { name: 'Slime', level: 2, attack: 3, health: 4, gold: 5 },
-  { name: 'Slime', level: 1, attack: 2, health: 3, gold: 3 }
-  ] 
-*/
 
 function getEnemies(level) {
   const enemies = [];

@@ -52,6 +52,10 @@ async function setStats(user, stats) {
 
   updatedUser.playerStats.name = stats.name ? stats.name : "Gompei";
 
+  updatedUser.playerStats.maxHealth = stats.maxHealth
+    ? stats.maxHealth
+    : updatedUser.playerStats.currHealth;
+
   updatedUser.playerStats.currHealth = stats.currHealth
     ? stats.currHealth
     : updatedUser.playerStats.currHealth;

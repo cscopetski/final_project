@@ -7,6 +7,9 @@ window.onload = function () {
   const logoutButton = document.getElementById("logout-button");
   logoutButton.onclick = logout;
 
+  const restartButton = document.getElementById("restart-button");
+  restartButton.onclick = restart;
+
   const playerAvatar = document.getElementById("displayedImg");
   const playerName = document.getElementById("player-name");
 
@@ -89,6 +92,8 @@ async function getNextEncounter() {
     })
     .catch((err) => console.log(err));
 
+  console.log("Encoutner: " + encounter.type);
+
   getPlayerStats().then((stats) => {
     updateStats(stats);
     setEncounterText("");
@@ -99,13 +104,11 @@ async function getNextEncounter() {
     switch (encounter.type) {
       case encounterTypes[0]:
         printToScreen("Shop Encounter");
+        newStats = startShop(stats, encounter.data.items);
         break;
       case encounterTypes[1]:
         printToScreen("Combat Encounter");
         newStats = startCombat(stats, encounter.data.enemies);
-        break;
-      case encounterTypes[2]:
-        printToScreen("Non-Combat Encounter");
         break;
       default:
         console.log("Error getting encounter type");
@@ -140,6 +143,7 @@ async function getPlayerStats() {
 }
 
 async function setPlayerStats(stats) {
+  console.log(stats);
   return await fetch("/users/set-stats", {
     method: "POST",
     body: JSON.stringify(stats),
@@ -284,6 +288,82 @@ function startCombat(playerStats, enemies) {
         " AD:" +
         enemy.attack;
       updateStats(playerStats);
+    };
+    buttonContainer.append(btn);
+  });
+}
+
+function startShop(playerStats, items) {
+  //   items = [
+  //     { name: "DamageUp", stat: 10, cost: 5 },
+  //     { name: "HealthUp", stat: 10, cost: 5 },
+  //     { name: "Potion", stat: 10, cost: 5 },
+  //   ];
+
+  printToScreen("You have found a shop!");
+  setEncounterText("Choose an item to purchase: ");
+
+  const buttonContainer = document.querySelector("#button-container");
+  let count = 1;
+
+  const nextBtn = document.createElement("button");
+  nextBtn.textContent = "Next Encounter";
+
+  nextBtn.onclick = function () {
+    setPlayerStats(playerStats).then(() => {
+      getNextEncounter();
+    });
+  };
+  buttonContainer.append(nextBtn);
+
+  items.forEach((item) => {
+    if (item.name === "Potion") {
+      item.name = "Healing Potion";
+    }
+
+    printToScreen(
+      item.name + ":\nCost: " + item.cost + "\nStat: +" + item.stat
+    );
+
+    item.id = count;
+
+    const btn = document.createElement("button");
+    btn.id = count;
+
+    btn.textContent = item.name + " COST:" + item.cost + " STAT: +" + item.stat;
+
+    count++;
+
+    btn.onclick = function () {
+      if (playerStats.gold - item.cost >= 0) {
+        switch (item.name) {
+          case "HealthUp":
+            playerStats.currHealth += item.stat;
+            playerStats.maxHealth += item.stat;
+            break;
+          case "DamageUp":
+            playerStats.damage += item.stat;
+            break;
+          case "Potion":
+            playerStats.currHealth += item.stat;
+            playerStats.currHealth = Math.min(
+              playerStats.currHealth,
+              playerStats.maxHealth
+            );
+            break;
+
+          default:
+            break;
+        }
+
+        playerStats.gold -= item.cost;
+        printToScreen("Purchased " + item.name + " for " + item.cost + " gold");
+        updateStats(playerStats);
+        btn.parentNode.removeChild(btn);
+      } else {
+        btn.disabled = true;
+        printToScreen("Not enough gold to purchase that item!");
+      }
     };
     buttonContainer.append(btn);
   });
