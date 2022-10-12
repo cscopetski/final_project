@@ -13,6 +13,15 @@ p {
   font-size: 12px;
 }
 
+.stats {
+  display: flex;
+  align-items: flex-start;
+  justify-items: flex-end;
+  flex-direction: column-reverse;
+  height: 90%;
+  width: 100%;
+}
+
 .wrapper,
 html,
 body {
@@ -48,13 +57,7 @@ body {
 #midPanel {
   /*flex: 1 0 2;
     height:70%;*/
-  grid-column: 2 / 5;
-}
-
-#rightPanel {
-  /*flex: 1;
-    height:70%;*/
-  grid-column: 5 / 6;
+  grid-column: 2 / 6;
 }
 
 #bottom {
