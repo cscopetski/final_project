@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/charSelect.css" />
+
+    <!-- latest -->
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <!-- core style only -->
+    <link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  </head>
+  <body> 
+    
+<div class="row">
+    <div class="column">
+            <img src = "/public/images/hammer_guy.png"
+            alt = "player1"
+            onclick="displayChar(this);">
+  </div>
+    <div class="column">
+            <img src = "/public/images/knight.png"
+            alt = "player2"
+            onclick="displayChar(this);">
+  </div>
+    <div class="column">
+            <img src = "/public/images/sorceress.png"
+            alt = "player3"
+            onclick="displayChar(this);">
+  </div>
+</div>
+ 
+    <div class="container">
+        <img id="displayedImg">
+        <div id="imgtext"></div>
+    </div>
+    
+    <form class="char-form is-centered" style = "text-align: center">
+        <div class="nes-field">
+            <label for="name_field">Name your character: </label>
+            <input type="text" id="name_field" class="nes-input">
+        </div>
+        <p></p>
+        <button type="button" class="nes-btn is-primary" href="#">Start!</button>
+    </form>
+  </body>
+    
+  
+  
+</html>
+
+<script>
+  function displayChar(imgs) {
+  var dispImg = document.getElementById("displayedImg");
+  var imgText = document.getElementById("imgtext");
+  dispImg.src = imgs.src;
+  imgText.innerHTML = imgs.alt;
+  dispImg.parentElement.style.display = "block";
+}
+</script>
