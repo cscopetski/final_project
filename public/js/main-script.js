@@ -344,7 +344,7 @@ function startShop(playerStats, items) {
           case "DamageUp":
             playerStats.damage += item.stat;
             break;
-          case "Potion":
+          case "Healing Potion":
             playerStats.currHealth += item.stat;
             playerStats.currHealth = Math.min(
               playerStats.currHealth,
