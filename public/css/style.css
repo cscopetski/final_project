@@ -1,8 +1,12 @@
 @import "./node_modules/nes.css/css/nes.css";
 
-body {
-  font-family: "Press Start 2P";
+/*body{
+  font-family: 'Press Start 2P';
   background-color: black;
+}*/
+
+h1 {
+  padding: 5px;
 }
 
 p {
