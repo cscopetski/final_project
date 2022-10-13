@@ -56,4 +56,4 @@ Brainstorming - all
 - Kate - front end html and css (login and character select)
 
 ### 6. A link to your project video.
-
+#### Link: https://www.youtube.com/watch?v=3PgQ-U3BUfA
